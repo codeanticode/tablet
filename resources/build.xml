@@ -1,4 +1,4 @@
-<project name="ProcessingLibs" default="clean" basedir="../">
+<project name="protablet" default="clean" basedir="../">
 
     
 <!--	

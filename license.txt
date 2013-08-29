@@ -1,9 +1,6 @@
-A code template to build libraries for the Processing programming environment.
+Protablet library
 
-Part of the Processing project - http://processing.org
-
-Copyright (c) 2011-12 Elie Zananiri
-Copyright (c) 2008-11 Andreas Schlegel
+Copyright (c) 2008-13 Andres Colubri
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -18,3 +15,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+CONTRIBUTIONS
+
+1) Based on the Processing Library Template:
+https://github.com/processing/processing-library-template
+
+2) Simplified methods to access azimuth and altitude by Benedikt Gross: 
+http://benedikt-gross.de/
+
+
