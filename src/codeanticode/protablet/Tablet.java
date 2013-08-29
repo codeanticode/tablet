@@ -28,8 +28,11 @@
 package codeanticode.protablet;
 
 import processing.core.*;
+import processing.opengl.PGL;
+import processing.opengl.PGraphicsOpenGL;
 
 import jpen.event.*;
+import jpen.owner.multiAwt.AwtPenToolkit;
 import jpen.*;
 
 import java.lang.reflect.*;
@@ -75,17 +78,21 @@ public class Tablet implements PenListener {
    * Constant to identify the erasing tip of the pen.
    */
   public static final int ERASER = 3;
-
-  protected boolean saveState;
-  protected boolean isMovementEvent;
-  final protected PenStateCopy savedPen;
+  
   protected PApplet parent;
   protected PenManager pm;
+  
+  
   protected Method penButtonEventMethod;
   protected Method penKindEventMethod;
   protected Method penLevelEventMethod;
   protected Method penScrollEventMethod;
 
+  protected boolean isMovementEvent;
+  
+  protected boolean saveState;  
+  final protected PenStateCopy savedPen;  
+  
   /**
    * The class constructor that takes the parent Processing applet as parameter
    * to initialize the pen manager.
@@ -98,8 +105,15 @@ public class Tablet implements PenListener {
 
     fixPresentModeBug();
     welcome();
-    pm = new PenManager(parent);
-    pm.pen.addListener(this);
+    
+    if (parent.g instanceof PGraphicsOpenGL) {
+      // Using parent with an OpenGL renderer results in no tablet events being
+      // detected.
+      AwtPenToolkit.addPenListener(PGL.canvas, this);  
+    } else {
+      AwtPenToolkit.addPenListener(parent, this);
+    }
+    pm = AwtPenToolkit.getPenManager();    
     savedPen = new PenStateCopy();
 
     try {
