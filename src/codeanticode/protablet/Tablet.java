@@ -103,7 +103,6 @@ public class Tablet implements PenListener {
   public Tablet(PApplet parent) {
     this.parent = parent;
 
-    fixPresentModeBug();
     welcome();
     
     if (parent.g instanceof PGraphicsOpenGL) {
@@ -520,28 +519,5 @@ public class Tablet implements PenListener {
   
   private void welcome() {
     System.out.println("##library.name## ##library.prettyVersion## by ##author##");
-  }
-  
-  private void fixPresentModeBug() {
-    if (PApplet.platform == PConstants.WINDOWS && 
-        parent.displayWidth == parent.width && 
-        parent.displayHeight == parent.height) {
-      // On Windows, when the sketch runs in present mode and the size is equal
-      // to the screen resolution, the table reports the pressure as zero, unless
-      // pack is called on the frame:     
-      parent.frame.pack();
-      // From the documentation of pack():
-      //
-      // "Causes this Window to be sized to fit the preferred size and layouts 
-      // of its subcomponents. The resulting width and height of the window are 
-      // automatically enlarged if either of dimensions is less than the minimum 
-      // size as specified by the previous call to the setMinimumSize method. 
-      // If the window and/or its owner are not displayable yet, both of them 
-      // are made displayable before calculating the preferred size. The Window 
-      // is validated after its size is being calculated."
-      // 
-      // Since the only subcomponent of the frame is the applet, and both have
-      // the same size, then this call should be safe.      
-    }
   }
 }
