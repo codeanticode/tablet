@@ -25,7 +25,7 @@
  * @version     ##library.prettyVersion## (##library.version##)
  */
 
-package codeanticode.protablet;
+package codeanticode.tablet;
 
 import processing.core.*;
 import processing.opengl.PGL;
