@@ -1,6 +1,6 @@
 Protablet is a library for using pen tablets from Processing.
 
-CONTRIBUTIONS
+ACKNOWLEDGMENTS
 
 1) JPen (Java Pen Tablet Access Library):
 https://sourceforge.net/projects/jpen
