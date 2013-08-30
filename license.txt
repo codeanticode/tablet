@@ -1,4 +1,4 @@
-Protablet library
+Tablet library
 
 Copyright (c) 2008-13 Andres Colubri
 
