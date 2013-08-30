@@ -5,7 +5,7 @@
  * This program shows how to access position and pressure from the pen tablet.
  */
  
-import codeanticode.protablet.*;
+import codeanticode.tablet.*;
 
 Tablet tablet;
 

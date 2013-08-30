@@ -5,7 +5,7 @@
  * This program shows how to use the tilt values from the pen.
  */
  
-import codeanticode.protablet.*;
+import codeanticode.tablet.*;
 
 Tablet tablet;
 
