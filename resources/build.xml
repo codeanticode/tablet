@@ -1,4 +1,4 @@
-<project name="protablet" default="clean" basedir="../">
+<project name="Tablet" default="clean" basedir="../">
 
     
 <!--	
