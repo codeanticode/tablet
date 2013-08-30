@@ -1,4 +1,4 @@
-Protablet is a library for using pen tablets from Processing.
+Protablet is a library for using pen tablets from Processing. Only tested with Wacom tablets so far.
 
 ACKNOWLEDGMENTS
 
