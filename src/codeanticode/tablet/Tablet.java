@@ -28,13 +28,13 @@
 package codeanticode.tablet;
 
 import processing.core.*;
-import processing.opengl.PGL;
 import processing.opengl.PGraphicsOpenGL;
 
 import jpen.event.*;
 import jpen.owner.multiAwt.AwtPenToolkit;
 import jpen.*;
 
+import java.awt.Canvas;
 import java.lang.reflect.*;
 
 /**
@@ -107,8 +107,14 @@ public class Tablet implements PenListener {
     
     if (parent.g instanceof PGraphicsOpenGL) {
       // Using parent with an OpenGL renderer results in no tablet events being
-      // detected.
-      AwtPenToolkit.addPenListener(PGL.canvas, this);  
+      // detected, so will try to get the AWT canvas associated to the GL 
+      // surface, if any.
+      Object obj = PGraphicsOpenGL.pgl.getCanvas();
+      if (obj instanceof Canvas) {
+        AwtPenToolkit.addPenListener((Canvas)obj, this);  
+      } else {
+        AwtPenToolkit.addPenListener(parent, this);  
+      }
     } else {
       AwtPenToolkit.addPenListener(parent, this);
     }
