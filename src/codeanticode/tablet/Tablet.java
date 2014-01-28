@@ -109,9 +109,9 @@ public class Tablet implements PenListener {
       // Using parent with an OpenGL renderer results in no tablet events being
       // detected, so will try to get the AWT canvas associated to the GL 
       // surface, if any.
-      Object obj = PGraphicsOpenGL.pgl.getCanvas();
+      Object obj = ((PGraphicsOpenGL)parent.g).pgl.getCanvas();
       if (obj instanceof Canvas) {
-        AwtPenToolkit.addPenListener((Canvas)obj, this);  
+        AwtPenToolkit.addPenListener((Canvas)obj, this);
       } else {
         AwtPenToolkit.addPenListener(parent, this);  
       }
