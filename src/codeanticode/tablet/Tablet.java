@@ -27,9 +27,12 @@
 
 package codeanticode.tablet;
 
+import processing.awt.PGraphicsJava2D;
 import processing.core.*;
+import processing.javafx.PGraphicsFX2D;
+import processing.opengl.PGL;
 import processing.opengl.PGraphicsOpenGL;
-
+import processing.opengl.PSurfaceJOGL;
 import jpen.event.*;
 import jpen.owner.multiAwt.AwtPenToolkit;
 import jpen.*;
@@ -105,20 +108,27 @@ public class Tablet implements PenListener {
 
     welcome();
     
+    PSurface surf = parent.getSurface();
     if (parent.g instanceof PGraphicsOpenGL) {
+      throw new RuntimeException("The OpenGL renderer is not supported by the Tablet library");
       // Using parent with an OpenGL renderer results in no tablet events being
       // detected, so will try to get the AWT canvas associated to the GL 
       // surface, if any.
-      Object obj = ((PGraphicsOpenGL)parent.g).pgl.getCanvas();
-      if (obj instanceof Canvas) {
-        AwtPenToolkit.addPenListener((Canvas)obj, this);
-      } else {
-        AwtPenToolkit.addPenListener(parent, this);  
-      }
-    } else {
-      AwtPenToolkit.addPenListener(parent, this);
-    }
-    pm = AwtPenToolkit.getPenManager();    
+//      PSurfaceJOGL surf = (PSurfaceJOGL)parent.getSurface();      
+//      Object obj = surf.getNative();
+//      if (obj instanceof Canvas) {
+//        AwtPenToolkit.addPenListener((Canvas)obj, this);
+//      } else {
+//        AwtPenToolkit.addPenListener(parent, this);  
+//      }
+    } else if (parent.g instanceof PGraphicsFX2D) {
+      throw new RuntimeException("The JavaFX renderer is not supported by the Tablet library");
+//      AwtPenToolkit.addPenListener(parent, this);
+    } else if (parent.g instanceof PGraphicsJava2D) {
+      Canvas canvas = (Canvas)surf.getNative();
+      AwtPenToolkit.addPenListener(canvas, this);
+      pm = AwtPenToolkit.getPenManager();
+    }        
     savedPen = new PenStateCopy();
 
     try {

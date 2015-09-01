@@ -10,7 +10,7 @@ import codeanticode.tablet.*;
 Tablet tablet;
 
 void setup() {
-  size(640, 480, P2D); // Using OpenGL renderer
+  size(640, 480);
  
   tablet = new Tablet(this); 
   
