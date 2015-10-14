@@ -40,6 +40,10 @@ import jpen.*;
 import java.awt.Canvas;
 import java.lang.reflect.*;
 
+import com.jogamp.newt.event.WindowAdapter;
+import com.jogamp.newt.event.WindowEvent;
+import com.jogamp.newt.opengl.GLWindow;
+
 /**
  * 
  * This class extends the PenListener class of the JPen library by adding getter
@@ -109,18 +113,28 @@ public class Tablet implements PenListener {
     welcome();
     
     PSurface surf = parent.getSurface();
-    if (parent.g instanceof PGraphicsOpenGL) {
-      throw new RuntimeException("The OpenGL renderer is not supported by the Tablet library");
+    if (parent.g instanceof PGraphicsOpenGL) {      
       // Using parent with an OpenGL renderer results in no tablet events being
       // detected, so will try to get the AWT canvas associated to the GL 
       // surface, if any.
-//      PSurfaceJOGL surf = (PSurfaceJOGL)parent.getSurface();      
-//      Object obj = surf.getNative();
-//      if (obj instanceof Canvas) {
-//        AwtPenToolkit.addPenListener((Canvas)obj, this);
-//      } else {
-//        AwtPenToolkit.addPenListener(parent, this);  
+      GLWindow win = (GLWindow)surf.getNative();
+      win.addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowDestroyNotify(WindowEvent ev) {
+            synchronized(Tablet.class) {
+              Tablet.class.notify();
+            }
+        }
+      });
+      pm = new PenManager(new WindowPenOwner(win));
+      pm.pen.addListener(this);
+      
+//      try {
+//        Tablet.class.wait();
+//      } catch (InterruptedException e) {
+//        e.printStackTrace();
 //      }
+      
     } else if (parent.g instanceof PGraphicsFX2D) {
       throw new RuntimeException("The JavaFX renderer is not supported by the Tablet library");
 //      AwtPenToolkit.addPenListener(parent, this);
