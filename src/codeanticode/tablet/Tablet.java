@@ -30,9 +30,9 @@ package codeanticode.tablet;
 import processing.awt.PGraphicsJava2D;
 import processing.core.*;
 import processing.javafx.PGraphicsFX2D;
-import processing.opengl.PGL;
+//import processing.opengl.PGL;
 import processing.opengl.PGraphicsOpenGL;
-import processing.opengl.PSurfaceJOGL;
+//import processing.opengl.PSurfaceJOGL;
 import jpen.event.*;
 import jpen.owner.multiAwt.AwtPenToolkit;
 import jpen.*;
@@ -145,6 +145,9 @@ public class Tablet implements PenListener {
     }        
     savedPen = new PenStateCopy();
 
+    // Disable event buffering
+    pm.pen.setFrequencyLater(1001);
+    
     try {
       penButtonEventMethod = parent.getClass().getMethod("penButtonEvent",
           new Class[] { Tablet.class });
