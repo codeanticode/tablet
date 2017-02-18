@@ -3,7 +3,7 @@
 	<classpathentry kind="src" output="bin" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/processing-core"/>
-	<classpathentry kind="lib" path="lib/jpen-2.jar"/>
+	<classpathentry kind="lib" path="lib/jpen-2.jar" sourcepath="jpen-src/jpen-code-321-trunk.zip"/>
 	<classpathentry kind="lib" path="/processing-core/library/jogl-all.jar"/>
 	<classpathentry kind="lib" path="/processing-core/library/gluegen-rt.jar"/>
 	<classpathentry kind="output" path="resources/code"/>
