@@ -3,7 +3,7 @@ Tablet is a library for using pen tablets from Processing. Only tested with Waco
 ACKNOWLEDGMENTS
 
 1) JPen (Java Pen Tablet Access Library):
-https://sourceforge.net/projects/jpen
+https://github.com/nicarran/jpen
 
 2) Processing Library Template:
 https://github.com/processing/processing-library-template
